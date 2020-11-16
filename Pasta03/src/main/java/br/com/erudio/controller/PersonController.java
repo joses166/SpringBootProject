@@ -3,7 +3,7 @@ package br.com.erudio.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,29 +23,30 @@ public class PersonController {
 	@Autowired
 	private PersonService services;
 	
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping
 	public List<Person> findAll() {
 		return services.findAll();
 	}
 	
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/{id}")
 	public Person findById(@PathVariable("id") Long id) {
 		return services.findById(id);
 	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping
 	public Person create(@RequestBody Person person) {
 		return services.create(person);
 	}
 	
-	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping
 	public Person update(@RequestBody Person person) {
 		return services.update(person);
 	}
 	
-	@DeleteMapping(value = "/{id}")
-	public void update(@PathVariable("id") Long id) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> update(@PathVariable("id") Long id) {
 		services.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 	
 }

@@ -13,10 +13,10 @@ import javax.persistence.Table;
 @Table(name = "person")
 public class Person implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4981580720307877700L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column(name = "first_name", nullable = false, length = 80)
